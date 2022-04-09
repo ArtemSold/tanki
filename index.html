@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		.enemy {
+			width: 200px;
+			height: 100px;
+			position: absolute;
+			borderRadius: 100px;
+		}
+	</style>
+</head>
+<body style="background: url(WarZone.jpg); background-size: 100%; background-repeat: no-repeat;">
+<button class="btn" style="margin-left: 675px">начать игру</button>
+<h1 style="margin-left: 555px;">Уничтоженные танки: <span class="tanks">0</span></h1>
+
+<div style="height: 50px; width: 1450px; top: 400px; position: absolute;"></div>
+<div style="height: 50px; width: 1450px; top: 500px; position: absolute;"></div>
+<div style="height: 50px; width: 1450px; top: 600px; position: absolute;"></div>
+
+
+<script type="text/javascript">
+	let number = 0;
+	let btn = document.querySelector(".btn")
+	
+
+	let randomizer = function(arg) {
+		let random = Math.random() * arg;//енератор случайного числа
+		let round = Math.round(random)//кругление числа
+		return round
+	}
+	let topPosition = [400,500,600]
+
+	let createEnemies = function(){
+		
+		let enemy = document.createElement("div")
+		document.body.appendChild(enemy)
+		enemy.classList.add("enemy")
+		enemy.style.left = randomizer(1000) + "px"
+		enemy.style.top = topPosition[randomizer(2)] + "px"
+
+
+		if (randomizer(3)==0) {
+			enemy.style.backgroundImage = "url(IS-3.png)"
+			enemy.style.backgroundSize = "100% 100%"
+			enemy.name = "good"
+		}
+		if (randomizer(3)==1) {
+			enemy.style.backgroundImage = "url(Tiger.png)"
+			enemy.style.backgroundSize = "100% 100%"
+			enemy.name = "bad"
+		}
+		if (randomizer(3)==2) {
+			enemy.style.backgroundImage = "url(pantera.png)"
+			enemy.style.backgroundSize = "100% 100%"
+			enemy.name = "bad"
+		}
+
+
+
+		enemy.onclick = function() {
+				enemy.style.backgroundImage = "url(bang.gif)"
+				enemy.style.backgroundSize = "100% 100%"
+				let stopgame = function() {
+				enemy.style.display = "none"
+				if (enemy.name=="good") {
+
+				}
+			}
+			setTimeout(stopgame,1700)
+		}	
+
+
+		
+	}
+
+	
+btn.onclick = function() {
+	let interval = setInterval(createEnemies,500)
+	let stopgame = function() {
+		clearInterval(interval)
+	}
+	setTimeout(stopgame,30000)
+}
+	
+
+
+</script>
+</body>
+</html>
